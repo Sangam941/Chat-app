@@ -4,6 +4,7 @@ import authRoutes from "./routes/auth.route";
 import { authMiddleware } from "./middleware/auth.middleware";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.route";
+import conversationRoutes from "./routes/conversation.route";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/conversation", conversationRoutes);
 
 app.get("/", (_req, res) => {
   res.json({
