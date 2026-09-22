@@ -9,6 +9,19 @@ export const fetchALlConversations=async (userId: number)=>{
                         userId
                     }
                 }
+            },
+            include:{
+                members:{
+                    include:{
+                        user:{
+                            select:{
+                                id:true,
+                                name:true,
+                                email:true,
+                            }
+                        }
+                    }
+                }
             }
         })
 

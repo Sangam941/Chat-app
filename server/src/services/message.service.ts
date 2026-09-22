@@ -46,7 +46,7 @@ export const createNewMessage = async (senderId:number, conversationId:number, c
 }
 
 
-export const getConversationMessages = async(conversationId:number, userId:number)=>{
+export const getConversationMessages = async(userId:number, conversationId:number)=>{
     try {
         const isMember = await prisma.conversationMembers.findUnique({
             where:{
@@ -64,7 +64,7 @@ export const getConversationMessages = async(conversationId:number, userId:numbe
         // fetch the messages
         return await prisma.message.findMany({
             where:{
-                conversationId
+                conversationId:conversationId
             },
             include:{
                 sender:{
@@ -76,11 +76,11 @@ export const getConversationMessages = async(conversationId:number, userId:numbe
                 }
             },
             orderBy:{
-                createdAt:'asc'
+                createdAt:'desc'
             }
         })
 
     } catch (error) {
-        throw new Error("Error while fetching all the conversation message")
+        throw new Error("Error while fetching all the conversation message" + error)
     }
 }

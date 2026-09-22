@@ -5,6 +5,9 @@ import { authMiddleware } from "./middleware/auth.middleware";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.route";
 import conversationRoutes from "./routes/conversation.route";
+import messageRoutes from "./routes/message.route"
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger";
 
 dotenv.config();
 
@@ -16,9 +19,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
-app.use("/conversation", conversationRoutes);
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/conversation", conversationRoutes);
+app.use("/api/message", messageRoutes)
 
 app.get("/", (_req, res) => {
   res.json({
