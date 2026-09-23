@@ -7,4 +7,12 @@ const connectionString = `${process.env.DATABASE_URL}`;
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
+prisma.$connect()
+  .then(() => {
+    console.log("✅ Database connected");
+  })
+  .catch((error) => {
+    console.error("❌ Database connection failed:", error);
+  });
+
 export { prisma };

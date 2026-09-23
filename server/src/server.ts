@@ -6,8 +6,6 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.route";
 import conversationRoutes from "./routes/conversation.route";
 import messageRoutes from "./routes/message.route"
-import swaggerUi from "swagger-ui-express";
-import { swaggerSpec } from "./config/swagger";
 
 dotenv.config();
 
@@ -19,7 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
@@ -33,6 +30,5 @@ app.get("/", (_req, res) => {
 });
 
 app.listen(PORT, () => {
-    // console.log(process.env.DATABASE_URL)
   console.log(`Server running on port ${PORT}`);
 });
